@@ -1,0 +1,15 @@
+[includeIf "gitdir:~/code/work/"]
+  path = ~/code/work/.gitconfig
+[includeIf "gitdir:~/code/personal/"]
+  path = ~/code/personal/.gitconfig
+[include]
+    path = ~/.gitalias
+[alias]
+    undo = reset --soft HEAD~1
+    amend = commit --amend --no-edit
+    l = log --graph --abbrev-commit --decorate --all --topo-order --date=format:'%d %b %H:%M:%S' --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset %C(dim white)-%Creset %s %Cblue[%cn]%Creset %C(bold green)(%ar)%Creset%C(yellow)%d%Creset'
+    up = rebase origin/master
+[core]
+  editor = "code --wait"
+[user]
+  name = Albert Abdulmanov

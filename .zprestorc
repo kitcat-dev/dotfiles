@@ -1,0 +1,37 @@
+zstyle ':prezto:*:*' color 'yes'
+
+zstyle ':prezto:load' pmodule \
+  'environment' \
+  'terminal' \
+  'editor' \
+  'history' \
+  'directory' \
+  'spectrum' \
+  'utility' \
+  'ssh' \
+  'completion' \
+  'ruby' \
+  'git' \
+  'syntax-highlighting' \
+  'history-substring-search' \
+  'prompt'
+
+zstyle ':prezto:module:editor' key-bindings 'emacs'
+zstyle ':prezto:module:prompt' theme 'pure'
+zstyle ':prezto:module:prompt' pwd-length 'long'
+zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
+zstyle ':prezto:module:ruby:info:version' format 'version:%v'
+zstyle ':prezto:module:ssh:load' identities 'id_rsa'
+
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'pattern' \
+  'line' \
+  'cursor' \
+  'root'
+
+zstyle ':prezto:module:terminal' auto-title 'yes'
+zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
+zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
+zstyle ':prezto:module:terminal:multiplexer-title' format '%s'

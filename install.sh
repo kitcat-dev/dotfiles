@@ -7,6 +7,7 @@ cp -r $HOMEDIR/.ssh $HOME/.ssh
 cp -r $HOMEDIR/code $HOME/code
 cp $HOMEDIR/.gitalias $HOME/.gitalias
 cp $HOMEDIR/.gitconfig $HOME/.gitconfig
+cp $HOMEDIR/.gitignore $HOME/.gitignore
 cp $HOMEDIR/.zprestorc $HOME/.zprestorc
 cp $HOMEDIR/.zshrc $HOME/.zshrc
 

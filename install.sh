@@ -39,6 +39,9 @@ brew install iterm2 telegram visual-studio-code transmission kap rectangle vlc -
 # Install utilities from NPM
 npm install tldr vtop --global # npm-check-updates trash trash-cli prettyjson eslint
 
+# Copy Raycast script commands
+cp -r raycast_commands $HOME/raycast_commands
+
 # Colorize iTerm2
 open "./theme/material-design-colors.itermcolors";ok
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false;ok

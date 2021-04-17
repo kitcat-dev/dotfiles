@@ -11,4 +11,4 @@ chmod +x install.sh
 
 ## Raycast
 
-Don't forget to add useful [script commands](https://github.com/raycast/script-commands) from from time to time.
+Don't forget to add useful [script commands](https://github.com/raycast/script-commands) from time to time.

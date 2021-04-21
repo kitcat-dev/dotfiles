@@ -12,4 +12,5 @@
 
 # @raycast.argument1 { "type": "text", "placeholder": "Say this...", "optional": false }
 
-say "$1"
+# Russian speaker
+say "$1" -v Milena

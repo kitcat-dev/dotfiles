@@ -1,7 +1,7 @@
-[includeIf "gitdir:~/code/work/"]
-    path = ~/code/work/.gitconfig
-[includeIf "gitdir:~/code/personal/"]
-    path = ~/code/personal/.gitconfig
+[includeIf "gitdir:~/Developer/work/"]
+    path = ~/Developer/work/.gitconfig
+[includeIf "gitdir:~/Developer/personal/"]
+    path = ~/Developer/personal/.gitconfig
 [include]
     path = ~/.gitalias
 [core]

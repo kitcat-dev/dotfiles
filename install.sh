@@ -4,7 +4,7 @@ HOMEDIR = "./homedir"
 
 # Copy configuration files
 cp -r $HOMEDIR/.ssh $HOME/.ssh
-cp -r $HOMEDIR/code $HOME/code
+cp -r $HOMEDIR/Developer $HOME/Developer
 cp $HOMEDIR/.gitalias $HOME/.gitalias
 cp $HOMEDIR/.gitconfig $HOME/.gitconfig
 cp $HOMEDIR/.gitignore $HOME/.gitignore

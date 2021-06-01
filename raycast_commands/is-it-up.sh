@@ -18,12 +18,12 @@
 # @raycast.author Jesse Claven
 # @raycast.authorURL https://github.com/jesse-c
 
-if ! command -v /opt/homebrew/bin/jq &> /dev/null; then
+if ! command -v /usr/local/bin/jq &> /dev/null; then
   echo "jq is required (https://stedolan.github.io/jq/).";
   exit 1;
 fi
 
-status_code=$(curl --silent "https://isitup.org/$1.json" | /opt/homebrew/bin/jq '.status_code')
+status_code=$(curl --silent "https://isitup.org/$1.json" | /usr/local/bin/jq '.status_code')
 
 # Sample output:
 #

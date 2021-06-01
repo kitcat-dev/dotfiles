@@ -15,23 +15,23 @@
 # @raycast.refreshTime 20m
 # @raycast.schemaVersion 1
 
-if ! command -v /opt/homebrew/bin/speedtest &> /dev/null; then
+if ! command -v /usr/local/bin/speedtest &> /dev/null; then
 	echo "speedtest command is required (https://www.speedtest.net/apps/cli).";
 	exit 1;
 fi
 
-if ! command -v /opt/homebrew/bin/jq &> /dev/null; then
+if ! command -v /usr/local/bin/jq &> /dev/null; then
 	echo "jq is required (https://stedolan.github.io/jq/).";
 	exit 1;
 fi
 
-json=$(/opt/homebrew/bin/speedtest -f json-pretty)
+json=$(/usr/local/bin/speedtest -f json-pretty)
 
-report_url=$(echo "$json" | /opt/homebrew/bin/jq -r '.result.url')
+report_url=$(echo "$json" | /usr/local/bin/jq -r '.result.url')
 
-    ping=$(echo "$json" | /opt/homebrew/bin/jq -r '.ping.latency')
-bps_down=$(echo "$json" | /opt/homebrew/bin/jq -r '.download.bandwidth')
-  bps_up=$(echo "$json" | /opt/homebrew/bin/jq -r '.upload.bandwidth')
+    ping=$(echo "$json" | /usr/local/bin/jq -r '.ping.latency')
+bps_down=$(echo "$json" | /usr/local/bin/jq -r '.download.bandwidth')
+  bps_up=$(echo "$json" | /usr/local/bin/jq -r '.upload.bandwidth')
 
 divide_to_mbps=125000
 mbps_down=$(echo "scale=2; $bps_down / $divide_to_mbps" | bc)

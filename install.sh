@@ -35,10 +35,10 @@ volta install yarn
 
 # Install soft
 brew install coreutils the_silver_searcher fd httpie jq exa hyperfine # autojump bat fzf
-brew install iterm2 raycast telegram visual-studio-code transmission kap rectangle vlc --cask # slack docker imageoptim keka balenaetcher qlstephen qlmarkdown qlimagesize qlvideo suspicious-package quicklook-json'
+brew install iterm2 raycast telegram visual-studio-code transmission kap rectangle vlc slack --cask # docker imageoptim keka balenaetcher qlstephen qlmarkdown qlimagesize qlvideo suspicious-package quicklook-json'
 
 # Install utilities from NPM
-npm install tldr vtop --global # npm-check-updates trash trash-cli prettyjson eslint
+npm install tldr vtop trash trash-cli eslint --global
 
 # Copy Raycast script commands
 cp -r raycast_commands $HOME/raycast_commands

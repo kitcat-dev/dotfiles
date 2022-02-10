@@ -12,5 +12,6 @@
 [alias]
     undo = reset --soft HEAD~1
     amend = commit --amend --no-edit
-    l = log --graph --abbrev-commit --decorate --all --topo-order --date=format:'%d %b %H:%M:%S' --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset %C(dim white)-%Creset %s %Cblue[%cn]%Creset %C(bold green)(%ar)%Creset%C(yellow)%d%Creset'
     up = rebase origin/master
+    l = log --graph --abbrev-commit --decorate --all --topo-order --date=format:'%d %b %H:%M:%S' --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset %C(dim white)-%Creset %s %Cblue[%cn]%Creset %C(bold green)(%ar)%Creset%C(yellow)%d%Creset'
+    local-branches = "!git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'"

@@ -10,7 +10,6 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'ssh' \
   'completion' \
-  'ruby' \
   'git' \
   'syntax-highlighting' \
   'history-substring-search' \
@@ -19,9 +18,7 @@ zstyle ':prezto:load' pmodule \
 zstyle ':prezto:module:editor' key-bindings 'emacs'
 zstyle ':prezto:module:prompt' theme 'pure'
 zstyle ':prezto:module:prompt' pwd-length 'long'
-zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
-zstyle ':prezto:module:ruby:info:version' format 'version:%v'
-zstyle ':prezto:module:ssh:load' identities 'id_rsa' # Add all your identities!
+zstyle ':prezto:module:ssh:load' identities 'id_rsa_personal' # Add all your identities!
 
 zstyle ':prezto:module:syntax-highlighting' highlighters \
   'main' \

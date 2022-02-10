@@ -8,7 +8,7 @@ cp -r $HOMEDIR/Developer $HOME/Developer
 cp $HOMEDIR/.gitalias $HOME/.gitalias
 cp $HOMEDIR/.gitconfig $HOME/.gitconfig
 cp $HOMEDIR/.gitignore $HOME/.gitignore
-cp $HOMEDIR/.zprestorc $HOME/.zprestorc
+cp $HOMEDIR/.zpreztorc $HOME/.zpreztorc
 cp $HOMEDIR/.zshrc $HOME/.zshrc
 
 chmod 400 $HOME/.ssh/id_rsa

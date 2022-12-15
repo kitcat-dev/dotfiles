@@ -2,13 +2,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
 # node
-export PATH=$HOME/.npm-global/bin:$PATH
-export PATH=$HOME/.yarn/bin:$PATH
+eval "$(fnm env --use-on-cd)"
 
 # editor
 if [[ -n $SSH_CONNECTION ]]; then

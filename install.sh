@@ -4,14 +4,13 @@ HOMEDIR = "./homedir"
 
 # Copy configuration files
 cp -r $HOMEDIR/.ssh $HOME/.ssh
-cp -r $HOMEDIR/Developer $HOME/Developer
 cp $HOMEDIR/.gitalias $HOME/.gitalias
 cp $HOMEDIR/.gitconfig $HOME/.gitconfig
 cp $HOMEDIR/.gitignore $HOME/.gitignore
 cp $HOMEDIR/.zpreztorc $HOME/.zpreztorc
 cp $HOMEDIR/.zshrc $HOME/.zshrc
 
-chmod 400 $HOME/.ssh/id_rsa
+chmod 400 $HOME/.ssh/kitcat_rsa
 
 # Install Brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -28,20 +27,14 @@ done
 
 chsh -s /bin/zsh
 
-# Install Volta
-curl https://get.volta.sh | bash
-volta install node
-volta install yarn
-
-# Install soft
-brew install coreutils the_silver_searcher fd httpie jq exa hyperfine # autojump bat fzf
-brew install iterm2 raycast telegram visual-studio-code transmission kap rectangle vlc slack --cask # docker imageoptim keka balenaetcher qlstephen qlmarkdown qlimagesize qlvideo suspicious-package quicklook-json'
+# Install software
+brew install fd jq fnm the exa bat fzf tldr silver httpie searcher autojump coreutils hyperfine
+brew install k9s colima kubectl azure-cli sentry-cli
+brew install vlc slack iterm2 alt-tab raycast telegram transmission balenaetcher google-chrome-dev visual-studio-code --cask
 
 # Install utilities from NPM
-npm install tldr vtop trash trash-cli eslint --global
-
-# Copy Raycast script commands
-cp -r raycast_commands $HOME/raycast_commands
+npm i pnpm@7.33.5 --registry=https://registry.npmjs.org/ --global
+pnpm add eslint -g # vtop
 
 # Colorize iTerm2
 open "./theme/material-design-colors.itermcolors";ok

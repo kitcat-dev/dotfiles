@@ -6,9 +6,55 @@
 [user]
     name = Albert Abdulmanov
     email = user@domain
+[push]
+	autoSetupRemote = true
 [alias]
-    undo = reset --soft HEAD~1
-    amend = commit --amend --no-edit
-    up = rebase origin/master
-    l = log --graph --abbrev-commit --decorate --all --topo-order --date=format:'%d %b %H:%M:%S' --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset %C(dim white)-%Creset %s %Cblue[%cn]%Creset %C(bold green)(%ar)%Creset%C(yellow)%d%Creset'
-    local-branches = "!git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'"
+  a = add
+  aa = add --all
+  base = !git log -1 $(git merge-base --fork-point master)
+  c = commit
+  cm = commit --message
+  co = checkout
+  cp = cherry-pick
+  cp-nx = cherry-pick --no-commit -x
+  f = fetch
+  gg = !"f() { git rev-list --all | xargs git grep --break --heading --line-number --color \"$@\"; }; f"
+  head = log -1 HEAD --stat
+  heads = !"git log origin/master.. --format='%Cred%h%Creset;%C(yellow)%an%Creset;%H;%Cblue%f%Creset' | git name-rev --annotate-stdin --always --name-only | column -t -s';'"
+  l = log --graph --abbrev-commit --decorate --all --topo-order --date=format:'%d %b %H:%M:%S' --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset %C(dim white)-%Creset %s %Cblue[%cn]%Creset %C(bold green)(%ar)%Creset%C(yellow)%d%Creset'
+  ls = !git --no-pager diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD master)
+  p = pull
+  s = status --short --branch
+  up = rebase origin/master
+  w = whatchanged
+
+  wip = !"git add --all; git ls-files --deleted -z | xargs -0 git rm; git commit --message=wip"
+  unwip = !"git log -n 1 | grep -q -c wip && git reset HEAD~1"
+
+  # Staged changes --> Last commit
+  amend = commit --amend --no-edit
+  # Last commit --> Staged changes
+  undo = reset --soft HEAD~1
+  # Staged changes --> Changes
+  unstage = reset HEAD
+  # Staged changes, Changes --> [drop]
+  discard = reset --hard
+
+  reset-to-upstream = "!git reset --hard \"$(git upstream-branch)\""
+  fetch-master = fetch origin master:master
+
+  local-branches = "!git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'"
+
+  log-local = log --oneline origin..HEAD
+  log-master = log --oneline HEAD..origin/master
+
+  stashes = stash list
+
+  whatis = show --no-patch --pretty='tformat:%h (%s, %ad)' --date=short
+
+  root = rev-parse --show-toplevel
+
+  upstream-branch = !git for-each-ref --format='%(upstream:short)' $(git symbolic-ref -q HEAD)
+
+  aliases = "!git config --get-regexp '^alias\\.' | cut -c 7- | sed 's/ / = /'"
+

@@ -9,27 +9,27 @@
 [push]
 	autoSetupRemote = true
 [alias]
-  a = add
   aa = add --all
-  base = !git log -1 $(git merge-base --fork-point master)
-  c = commit
-  cm = commit --message
+  base = !git log -1 $(git merge-base --fork-point $(git trunk))
+  c = commit --message
   co = checkout
-  cp = cherry-pick
-  cp-nx = cherry-pick --no-commit -x
+  cp = !"f() { git add --all; git ls-files --deleted -z | xargs -0 git rm; git commit --message=\"$1\"; git push; }; f"
   f = fetch
+  fm = !git fetch origin $(git trunk):$(git trunk)
+  fpull = "!git reset --hard \"$(git upstream-branch)\""
+  fpush = push --force-with-lease
   gg = !"f() { git rev-list --all | xargs git grep --break --heading --line-number --color \"$@\"; }; f"
   head = log -1 HEAD --stat
-  heads = !"git log origin/master.. --format='%Cred%h%Creset;%C(yellow)%an%Creset;%H;%Cblue%f%Creset' | git name-rev --annotate-stdin --always --name-only | column -t -s';'"
-  l = log --graph --abbrev-commit --decorate --all --topo-order --date=format:'%d %b %H:%M:%S' --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset %C(dim white)-%Creset %s %Cblue[%cn]%Creset %C(bold green)(%ar)%Creset%C(yellow)%d%Creset'
-  ls = !git --no-pager diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD master)
-  p = pull
+  heads = !"git log origin/$(git trunk).. --format='%Cred%h%Creset;%C(yellow)%an%Creset;%H;%Cblue%f%Creset' | git name-rev --annotate-stdin --always --name-only | column -t -s';'"
+  l = log --graph --abbrev-commit --decorate --exclude=refs/remotes/origin/gh-pages --all --topo-order --date=format:'%d %b %H:%M:%S' --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset %C(dim white)-%Creset %s %Cblue[%cn]%Creset %C(bold green)(%ar)%Creset%C(yellow)%d%Creset'
+  ls = !git --no-pager diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD $(git trunk))
+  p = push
   s = status --short --branch
-  up = rebase origin/master
+  up = !git rebase origin/$(git trunk)
   w = whatchanged
 
   wip = !"git add --all; git ls-files --deleted -z | xargs -0 git rm; git commit --message=wip"
-  unwip = !"git log -n 1 | grep -q -c wip && git reset HEAD~1"
+  wipp = !"git wip; git push;"
 
   # Staged changes --> Last commit
   amend = commit --amend --no-edit
@@ -40,21 +40,42 @@
   # Staged changes, Changes --> [drop]
   discard = reset --hard
 
-  reset-to-upstream = "!git reset --hard \"$(git upstream-branch)\""
-  fetch-master = fetch origin master:master
+  sq = !"git reset --soft $(git merge-base $(git trunk) HEAD)"
 
   local-branches = "!git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'"
-
   log-local = log --oneline origin..HEAD
-  log-master = log --oneline HEAD..origin/master
-
+  log-trunk = !git log --oneline HEAD..origin/$(git trunk)
   stashes = stash list
-
-  whatis = show --no-patch --pretty='tformat:%h (%s, %ad)' --date=short
-
-  root = rev-parse --show-toplevel
-
-  upstream-branch = !git for-each-ref --format='%(upstream:short)' $(git symbolic-ref -q HEAD)
-
   aliases = "!git config --get-regexp '^alias\\.' | cut -c 7- | sed 's/ / = /'"
 
+  whatis = show --no-patch --pretty='tformat:%h (%s, %ad)' --date=short
+  root = rev-parse --show-toplevel
+  upstream-branch = !git for-each-ref --format='%(upstream:short)' $(git symbolic-ref -q HEAD)
+
+  trunk = !git remote show origin | awk '/HEAD branch/ {print $NF}'
+
+  rename-branch = "!f(){ \
+    new_branch=\"$1\"; \
+    old_branch=$(git branch --show-current); \
+    git branch --move \"$old_branch\" \"$new_branch\"; \
+    git push origin \":$old_branch\" \"$new_branch\"; \
+  };f"
+
+  summary = "!f() { \
+    printf \"Summary of this branch...\n\"; \
+    printf \"%s\n\" $(git rev-parse --abbrev-ref HEAD); \
+    printf \"%s first commit timestamp\n\" $(git log --date-order --format=%cI | tail -1); \
+    printf \"%s latest commit timestamp\n\" $(git log -1 --date-order --format=%cI); \
+    printf \"%d commit count\n\" $(git rev-list --count HEAD); \
+    printf \"%d date count\n\" $(git log --format=oneline --format=\"%ad\" --date=format:\"%Y-%m-%d\" | awk '{a[$0]=1}END{for(i in a){n++;} print n}'); \
+    printf \"%d tag count\n\" $(git tag | wc -l); \
+    printf \"%d author count\n\" $(git log --format=oneline --format=\"%aE\" | awk '{a[$0]=1}END{for(i in a){n++;} print n}'); \
+    printf \"%d committer count\n\" $(git log --format=oneline --format=\"%cE\" | awk '{a[$0]=1}END{for(i in a){n++;} print n}'); \
+    printf \"%d local branch count\n\" $(git branch | grep -v \" -> \" | wc -l); \
+    printf \"%d remote branch count\n\" $(git branch -r | grep -v \" -> \" | wc -l); \
+    printf \"\nSummary of this directory...\n\"; \
+    printf \"%s\n\" $(pwd); \
+    printf \"%d file count via git ls-files\n\" $(git ls-files | wc -l); \
+    printf \"%d file count via find command\n\" $(find . | wc -l); \
+    printf \"%d disk usage\n\" $(du -s | awk '{print $1}'); \
+  }; f"

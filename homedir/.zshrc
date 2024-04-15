@@ -11,18 +11,20 @@ fi
 
 # ALIASES
 alias g="git"
+alias p="pnpm"
+alias md="glow"
 alias rimraf="rm -rf"
 
-alias dc="docker-compose"
 alias docker-clear="docker rmi \$(docker images -f \"dangling=true\" -q)"
 
 # NODE
 eval "$(fnm env --use-on-cd)"
+
+autoload -U +X bashcompinit && bashcompinit
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # TOKENS
 
 # export SMTH=...
 
 # CUSTOM
-
-autoload -U +X bashcompinit && bashcompinit

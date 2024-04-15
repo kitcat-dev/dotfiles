@@ -1,11 +1,13 @@
 [include]
-    path = ~/.gitalias
+  path = ~/.gitalias
 [core]
-    excludesfile = ~/.gitignore
-    editor = "code --wait"
+  excludesfile = ~/.gitignore
+  editor = "code --wait"
 [user]
-    name = Albert Abdulmanov
-    email = user@domain
+  name = Albert Abdulmanov
+  email = user@domain
+[safe]
+	directory = *
 [push]
 	autoSetupRemote = true
 [alias]

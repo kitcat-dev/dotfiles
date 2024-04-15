@@ -30,10 +30,11 @@ chsh -s /bin/zsh
 # Install software
 brew install fd jq fnm the exa bat fzf tldr silver httpie searcher autojump coreutils hyperfine
 brew install k9s colima kubectl azure-cli sentry-cli
-brew install vlc zoom slack iterm2 alt-tab raycast telegram obsidian proxyman 1password bitwarden gitkraken transmission balenaetcher google-drive scroll-reverser google-chrome-dev visual-studio-code --cask
+brew install vlc zoom slack iterm2 alt-tab raycast telegram obsidian proxyman 1password 1password-cli bitwarden gitkraken \
+  transmission balenaetcher google-drive scroll-reverser google-chrome-dev visual-studio-code discord --cask
 
 # Install utilities from NPM
-npm i pnpm@7.33.5 --registry=https://registry.npmjs.org/ --global
+npm i pnpm --global
 pnpm add eslint -g # vtop
 
 # Colorize iTerm2

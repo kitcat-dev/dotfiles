@@ -28,7 +28,7 @@ done
 chsh -s /bin/zsh
 
 # Install software
-brew install fd jq fnm the exa bat fzf tldr silver httpie searcher autojump coreutils hyperfine
+brew install fd jq fnm the_silver_searcher exa bat fzf tldr httpie autojump coreutils hyperfine
 brew install k9s colima kubectl azure-cli sentry-cli
 brew install vlc zoom slack iterm2 alt-tab raycast telegram obsidian proxyman 1password 1password-cli bitwarden gitkraken \
   transmission balenaetcher google-drive scroll-reverser google-chrome-dev visual-studio-code discord --cask
